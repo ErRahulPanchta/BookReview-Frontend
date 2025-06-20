@@ -30,7 +30,7 @@ const BookDetails = () => {
       return;
     }
     try {
-      await Axios.post('/api/book/reviews', {
+      await Axios.post('/api/reviews', {
         ...form,
         book: id, // match backend key
       }, {
