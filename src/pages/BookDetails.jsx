@@ -32,7 +32,7 @@ const BookDetails = () => {
     try {
       await Axios.post('/api/reviews', {
         ...form,
-        book: id, // match backend key
+        bookId: id, 
       }, {
         headers: {
           Authorization: `Bearer ${userInfo?.token}`,
