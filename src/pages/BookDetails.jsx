@@ -29,7 +29,7 @@ const BookDetails = () => {
       });
       toast.success('Review submitted');
       setForm({ rating: 0, comment: '' });
-      const res = await Axios.get(`/reviews/${id}`);
+      const res = await Axios.get(`/api/reviews/${id}`);
       setReviews(res.data);
     } catch (err) {
       toast.error(err.response?.data?.message || 'Error posting review');
