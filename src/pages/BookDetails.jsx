@@ -13,8 +13,8 @@ const BookDetails = () => {
   const { userInfo } = useSelector((state) => state.user);
 
   useEffect(() => {
-    Axios.get(`/books/${id}`).then(res => setBook(res.data));
-    Axios.get(`/reviews/${id}`).then(res => setReviews(res.data));
+    Axios.get(`/api/books/${id}`).then(res => setBook(res.data));
+    Axios.get(`/api/reviews/${id}`).then(res => setReviews(res.data));
   }, [id]);
 
   const handleSubmit = async (e) => {
@@ -24,7 +24,7 @@ const BookDetails = () => {
       return;
     }
     try {
-      await Axios.post('/reviews', { ...form, bookId: id }, {
+      await Axios.post('/api/reviews', { ...form, bookId: id }, {
         headers: { Authorization: `Bearer ${userInfo?.token}` },
       });
       toast.success('Review submitted');
@@ -44,8 +44,8 @@ const BookDetails = () => {
         {/* Book Cover and Basic Info */}
         <div className="md:w-1/3 lg:w-1/4">
           <div className="sticky top-8">
-            <img 
-              src={`http://localhost:8080/uploads/${book.coverImage}`} 
+            <img
+              src={`${import.meta.env.VITE_BACKEND_URL}/uploads/${book.coverImage}`}
               alt={book.title}
               className="w-full h-auto rounded-lg shadow-lg mb-6"
             />

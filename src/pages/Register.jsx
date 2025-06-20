@@ -26,7 +26,7 @@ const Register = () => {
 
     setLoading(true);
     try {
-      const res = await Axios.post('/auth/register', form);
+      const res = await Axios.post('/api/auth/register', form);
       dispatch(login(res.data));
       toast.success('Registration successful! Welcome!');
       navigate('/');

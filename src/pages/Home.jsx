@@ -11,7 +11,7 @@ const Home = () => {
   const { userInfo } = useSelector(state => state.user);
 
   useEffect(() => {
-    Axios.get('/books').then(res => {
+    Axios.get('/api/books').then(res => {
       const featuredBooks = res.data.books.slice(0, 3);
       setBooks(featuredBooks);
       setLoading(false);

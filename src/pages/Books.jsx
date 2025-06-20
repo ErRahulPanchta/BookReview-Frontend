@@ -30,7 +30,7 @@ const Books = () => {
       ...(selectedGenres.length > 0 && { genre: selectedGenres.join(',') })
     }).toString();
 
-    Axios.get(`/books?${params}`)
+    Axios.get(`/api/books?${params}`)
       .then(res => {
         setBooks(res.data.books);
         setTotalPages(res.data.totalPages);

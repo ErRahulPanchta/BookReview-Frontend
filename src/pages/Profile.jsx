@@ -15,7 +15,7 @@ const Profile = () => {
 
   useEffect(() => {
     if (userInfo) {
-      Axios.get(`/users/${userInfo._id}`, {
+      Axios.get(`/api/users/${userInfo._id}`, {
         headers: { Authorization: `Bearer ${userInfo.token}` },
       }).then(res => {
         setForm({ 
@@ -33,7 +33,7 @@ const Profile = () => {
     e.preventDefault();
     setUpdating(true);
     try {
-      const res = await Axios.put(`/users/${userInfo._id}`, form, {
+      const res = await Axios.put(`/api/users/${userInfo._id}`, form, {
         headers: { Authorization: `Bearer ${userInfo.token}` },
       });
       dispatch(login({ ...userInfo, name: res.data.name, avatar: res.data.avatar }));
