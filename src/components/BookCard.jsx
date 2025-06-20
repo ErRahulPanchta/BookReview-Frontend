@@ -30,7 +30,7 @@ const BookCard = ({ book }) => (
         </div>
 
         <Link
-          to={`/book/${book._id}`}
+          to={`/api/book/${book._id}`}
           className="px-3 py-1 bg-blue-600 hover:bg-blue-700 text-white text-sm rounded-md transition-colors duration-300"
         >
           View Details
