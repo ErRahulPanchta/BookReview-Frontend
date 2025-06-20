@@ -13,8 +13,14 @@ const BookDetails = () => {
   const { userInfo } = useSelector((state) => state.user);
 
   useEffect(() => {
-    Axios.get(`/api/books/${id}`).then(res => setBook(res.data));
-    Axios.get(`/api/reviews/${id}`).then(res => setReviews(res.data));
+    Axios.get(`/api/books/${id}`)
+      .then(res => {
+        setBook(res.data);
+        setReviews(res.data.reviews || []);
+      })
+      .catch(err => {
+        toast.error(err.response?.data?.message || 'Failed to fetch book');
+      });
   }, [id]);
 
   const handleSubmit = async (e) => {
@@ -24,13 +30,20 @@ const BookDetails = () => {
       return;
     }
     try {
-      await Axios.post('/api/reviews', { ...form, bookId: id }, {
-        headers: { Authorization: `Bearer ${userInfo?.token}` },
+      await Axios.post('/api/reviews', {
+        ...form,
+        book: id, // match backend key
+      }, {
+        headers: {
+          Authorization: `Bearer ${userInfo?.token}`,
+        },
       });
       toast.success('Review submitted');
       setForm({ rating: 0, comment: '' });
-      const res = await Axios.get(`/api/reviews/${id}`);
-      setReviews(res.data);
+
+      const res = await Axios.get(`/api/books/${id}`); // Re-fetch book with reviews
+      setBook(res.data);
+      setReviews(res.data.reviews || []);
     } catch (err) {
       toast.error(err.response?.data?.message || 'Error posting review');
     }
