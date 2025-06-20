@@ -3,13 +3,14 @@ import { Link } from 'react-router-dom';
 const BookCard = ({ book }) => (
   <div className="max-w-sm rounded-lg overflow-hidden shadow-lg hover:shadow-xl transition-shadow duration-300 bg-white dark:bg-gray-800">
     <div className="relative pb-[125%] overflow-hidden">
-      <img 
-        src={`http://localhost:8080/uploads/${book.coverImage}`} 
-        alt={book.title} 
+      <img
+        src={`${import.meta.env.VITE_BACKEND_URL}/uploads/${book.coverImage}`}
+        alt={book.title}
         className="absolute top-0 left-0 w-full h-full object-cover transition-transform duration-500 hover:scale-105"
       />
+
     </div>
-    
+
     <div className="p-4">
       <h3 className="text-lg font-semibold text-gray-800 dark:text-white line-clamp-1 mb-1">
         {book.title}
@@ -17,7 +18,7 @@ const BookCard = ({ book }) => (
       <p className="text-gray-600 dark:text-gray-300 text-sm mb-2 line-clamp-1">
         by {book.author}
       </p>
-      
+
       <div className="flex items-center justify-between">
         <div className="flex items-center">
           <svg className="w-4 h-4 text-yellow-400 mr-1" fill="currentColor" viewBox="0 0 20 20">
@@ -27,9 +28,9 @@ const BookCard = ({ book }) => (
             {book.rating?.toFixed(1) || "0"} / 5
           </span>
         </div>
-        
-        <Link 
-          to={`/book/${book._id}`} 
+
+        <Link
+          to={`/book/${book._id}`}
           className="px-3 py-1 bg-blue-600 hover:bg-blue-700 text-white text-sm rounded-md transition-colors duration-300"
         >
           View Details
